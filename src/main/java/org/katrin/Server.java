@@ -58,16 +58,11 @@ public class Server {
         }
     }
 
-    String readClient() {
+    String readClient() throws IOException {
         System.out.println(ServerMessages.WAITING_CLIENT_RESPONSE.getMessage());
         String clientLine = "";
-        try {
-            clientLine = clientReader.readLine();
-            System.out.println(ServerMessages.CLIENT_MESSAGE.getMessage() + clientLine);
-        } catch (IOException e) {
-            logger.warning(ServerMessages.IO_READ_EXCEPTION.getMessage());
-            System.exit(1);
-        }
+        clientLine = clientReader.readLine();
+        System.out.println(ServerMessages.CLIENT_MESSAGE.getMessage() + clientLine);
         return clientLine;
     }
 

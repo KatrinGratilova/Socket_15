@@ -43,17 +43,12 @@ public class Client {
         }
     }
 
-    void readServer() {
-        try {
-            System.out.println(ClientMessages.WAITING_SERVER_RESPONSE.getMessage());
-            String serverLine = serverReader.readLine();
-            System.out.println(ClientMessages.SERVER_MESSAGE.getMessage() + serverLine);
-            if (serverLine.contains("З'єднання буде перервано")) {
-                serverFinished = true;
-            }
-        } catch (IOException e) {
-            logger.warning(ClientMessages.IO_READ_EXCEPTION.getMessage());
-            System.exit(1);
+    void readServer() throws IOException {
+        System.out.println(ClientMessages.WAITING_SERVER_RESPONSE.getMessage());
+        String serverLine = serverReader.readLine();
+        System.out.println(ClientMessages.SERVER_MESSAGE.getMessage() + serverLine);
+        if (serverLine.contains("З'єднання буде перервано")) {
+            serverFinished = true;
         }
     }
 
