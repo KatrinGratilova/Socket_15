@@ -32,7 +32,7 @@ public class Client {
             } catch (UnknownHostException e) {
                 logger.warning(ClientMessages.SERVER_NOT_FOUND_EXCEPTION.getMessage());
             } finally {
-                if (writer != null) { //
+                if (writer != null) {
                     serverReader.close();
                     writer.close();
                     scanner.close();
@@ -53,6 +53,7 @@ public class Client {
             }
         } catch (IOException e) {
             logger.warning(ClientMessages.IO_READ_EXCEPTION.getMessage());
+            System.exit(1);
         }
     }
 
@@ -62,4 +63,3 @@ public class Client {
         writer.println(clientLine);
     }
 }
-

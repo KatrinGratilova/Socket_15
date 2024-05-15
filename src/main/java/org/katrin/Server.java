@@ -5,6 +5,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalDateTime;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Server {
     private static final Logger logger = Logger.getLogger(Server.class.getName());
@@ -22,7 +24,7 @@ public class Server {
                 writer = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream()), true);
                 clientReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-                writer.println("Hi! Please, translate the word \"hello\".");
+                answerClient("Hello!");
 
                 String clientLine = readClient();
 
@@ -30,12 +32,12 @@ public class Server {
                 if (!clientValidation) {
                     answerClient("Що таке паляниця?");
                     logger.info("Сервер відповів клієнту.");
+
                     clientLine = readClient();
                     boolean palianytsiaCheck = checkClientsPalianytsiaAnswer(clientLine); // did the client answer correctly
                     if (palianytsiaCheck) {
                         answerClient("Відповідь правильна! Поточна дата і час: "
                                 + LocalDateTime.now() + ". До побачення!");
-                        answerClient("До побачення!");
                     } else {
                         answerClient("Відповідь неправильна. Перериваю з'єднання.");
                     }
@@ -74,7 +76,9 @@ public class Server {
     }
 
     boolean checkClientsGreetings(String clientLine) {
-        if (clientLine.toLowerCase().contains("[ёъыэ]+") || clientLine.equalsIgnoreCase("привет")) {
+        Pattern pattern = Pattern.compile("[ыэъё]");
+        Matcher matcher = pattern.matcher(clientLine);
+        if (matcher.find() || clientLine.equalsIgnoreCase("привет")) {
             logger.info("Клієнт привітався не українською мовою.");
             return false;
         }
