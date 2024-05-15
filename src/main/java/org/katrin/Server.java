@@ -60,8 +60,7 @@ public class Server {
 
     String readClient() throws IOException {
         System.out.println(ServerMessages.WAITING_CLIENT_RESPONSE.getMessage());
-        String clientLine = "";
-        clientLine = clientReader.readLine();
+        String clientLine = clientReader.readLine();
         System.out.println(ServerMessages.CLIENT_MESSAGE.getMessage() + clientLine);
         return clientLine;
     }

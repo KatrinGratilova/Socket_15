@@ -5,7 +5,6 @@ public enum ServerMessages{
     WRITE_TO_CLIENT("Напишіть клієнту: "),
     WAITING_CLIENT_RESPONSE("Очікування повідомлення від клієнта..."),
     IO_EXCEPTION("Виникла помилка IO. Кінець програми."),
-    IO_READ_EXCEPTION("Неможливо зчитати повідомлення клієнта. Кінець програми."),
     CLIENT_ACCESSED("Клієнт був приєднаний!");
 
     private final String message;
